@@ -1,0 +1,23 @@
+Question 2
+1. Explain why do we want sometimes to use setImmediate instead of using setTimeout?
+-> setTimeout schedules a callback to run after a specific time, it runs in the timer phase. 
+-> setImmediate schedules a callback to run at check phase after I/O events callbacks. 
+-> If there is case that needs to run just before close phase, we use setImmediate.
+
+2. Explain the difference between process.nextTick and setImmediate?
+-> setImmediate schedules a callback to run at check phase of the event loop after I/O events callbacks. 
+-> process.nextTick is not part of the event loop, it adds the callback into the nextTick queue. 
+
+-> process.nextTick API is provided natively by Nodejs.
+-> setImmediate provided by libuv
+
+-> callback of process.nextTick get executed multiple chances in one iteration - highest priority
+-> setImmediate only get executed once in one cycle.
+
+-> how many callbacks will be executed in one iteration? 
+process.nextTick() - all of callbacks in nextTick queue, drain out - Don't use while true loop on process.nextTick, will block event loop. 
+setImmediate - certain, the remaining for next iteration/tick
+
+
+3. Does Node.js has window object?
+-> No 
